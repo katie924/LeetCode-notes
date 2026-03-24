@@ -1,6 +1,6 @@
 # JOIN / MERGE Pattern
 
-## 🧠 Concept Overview
+## Concept Overview
 
 JOIN is used to combine data from multiple tables based on a related column.
 
@@ -11,31 +11,30 @@ This is one of the **most important concepts** in data processing.
 
 ---
 
-## 🧩 Key Idea / Intuition
+## Key Idea / Intuition
 
 * You have **two tables**
 * You match them using a **key column**
 * You decide what to keep:
-
   * Only matches
   * All left
   * All right
   * Everything
-
-| Type       | SQL        | Pandas      | Description         |
-| ---------- | ---------- | ----------- | ------------------- |
-| Inner Join | INNER JOIN | how='inner' | Only matching rows  |
-| Left Join  | LEFT JOIN  | how='left'  | Keep all left rows  |
-| Right Join | RIGHT JOIN | how='right' | Keep all right rows |
-| Full Join  | FULL JOIN  | how='outer' | Keep everything     |
+* Type of JOIN:
+  | Type       | SQL        | Pandas      | Description         |
+  | ---------- | ---------- | ----------- | ------------------- |
+  | Inner Join | INNER JOIN | how='inner' | Only matching rows  |
+  | Left Join  | LEFT JOIN  | how='left'  | Keep all left rows  |
+  | Right Join | RIGHT JOIN | how='right' | Keep all right rows |
+  | Full Join  | FULL JOIN  | how='outer' | Keep everything     |
 
 ---
 
-## 🧪 Example Problems
+## Example Problems
 
-### 175. Combine Two Tables
+### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/description/)
 
-#### Description
+#### 📝 Description
 **Problem:**
 Return each person's first name, last name, city, and state.  
 If an address does not exist, `city` and `state` should be `NULL`.
@@ -46,7 +45,7 @@ LEFT JOIN
 **Why this problem belongs here:**
 We need to keep all rows from `Person` and match rows from `Address` when available.
 
-#### Example
+#### 🧩 Example
 **Input**
 
 `Person`
@@ -67,7 +66,7 @@ We need to keep all rows from `Person` and match rows from `Address` when availa
 | Allen     | Wang     | NULL          | NULL     |
 | Bob       | Alice    | New York City | New York |
 
-#### Solution
+#### 🧪 Solution
 **MySQL**
 ```sql
 SELECT p.firstName, p.lastName, a.city, a.state
@@ -80,12 +79,11 @@ ON p.personId = a.personId;
 ```python id="r4k2hd"
 def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
     return person.merge(address, on='personId', how='left')[['firstName', 'lastName', 'city', 'state']]
-    
 ```
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 * Missing join condition → **Cartesian product**
 * Duplicate keys → unexpected row duplication
@@ -93,7 +91,7 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ---
 
-## 📌 Summary
+## Summary
 
 * JOIN = combine tables using a key
 * SQL ↔ Pandas mapping is direct
@@ -104,7 +102,7 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ---
 
-## 🔗 Related Concepts
+## Related Concepts
 
 * Aggregation (GROUP BY)
 * Subqueries

@@ -1,54 +1,60 @@
 #  Pattern
 
-## 🧠 Concept Overview
+## Concept Overview
 
 
 ---
 
-## 🧩 Key Idea / Intuition
+## Key Idea / Intuition
 
 
 
 ---
 
-## 🧪 Example Problems
+## Example Problems
 
 ### [Problem Number]. [Problem Title]
 
-#### Description
-**Problem**
+#### 📝 Description
 
+**Problem**  
+...
 
-**Pattern**
+**Pattern**  
+...
 
+**Why this problem belongs here**  
+...
 
-**Why this problem belongs here**
+---
 
+#### 🧩 Example
 
-#### Example
 **Input**
+...
 
 **Output**
+...
 
-#### Solution
-**python**
+---
 
-```python id="r4k2hd"
+#### 🧪 Solution
 
+**Python**
+```python
 ```
-
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
-
-
----
-
-## 📌 Summary
 
 
 ---
 
-## 🔗 Related Concepts
+## Summary
+
+
+---
+
+## Related Concepts
 
