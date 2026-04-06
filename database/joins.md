@@ -4,7 +4,7 @@
 
 JOIN is used to combine data from multiple tables based on a related column.
 
-In SQL → `JOIN`
+In SQL → `JOIN`, 
 In Pandas → `merge()`
 
 This is one of the **most important concepts** in data processing.
@@ -40,7 +40,7 @@ Return each person's first name, last name, city, and state.
 If an address does not exist, `city` and `state` should be `NULL`.
 
 **Pattern:**
-LEFT JOIN
+`LEFT JOIN`
 
 **Why this problem belongs here:**
 We need to keep all rows from `Person` and match rows from `Address` when available.
@@ -85,7 +85,6 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ## Common Pitfalls
 
-* Missing join condition → **Cartesian product**
 * Duplicate keys → unexpected row duplication
 * Wrong join type → missing or extra rows
 
