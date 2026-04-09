@@ -26,8 +26,6 @@
 **Why this problem belongs here**  
 ...
 
----
-
 #### 🧩 Example
 
 **Input**
@@ -35,8 +33,6 @@
 
 **Output**
 ...
-
----
 
 #### 🧪 Solution
 

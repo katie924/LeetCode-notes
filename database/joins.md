@@ -4,8 +4,8 @@
 
 JOIN is used to combine data from multiple tables based on a related column.
 
-In SQL → `JOIN`, 
-In Pandas → `merge()`
+In SQL, we use `JOIN`.  
+In Pandas, we use `merge()`.
 
 This is one of the **most important concepts** in data processing.
 
@@ -13,20 +13,20 @@ This is one of the **most important concepts** in data processing.
 
 ## Key Idea / Intuition
 
-* You have **two tables**
-* You match them using a **key column**
-* You decide what to keep:
+- Start from one table
+- Match rows from another table using a key
+- Choose the correct join type
   * Only matches
   * All left
   * All right
   * Everything
-* Type of JOIN:
-  | Type       | SQL        | Pandas      | Description         |
-  | ---------- | ---------- | ----------- | ------------------- |
-  | Inner Join | INNER JOIN | how='inner' | Only matching rows  |
-  | Left Join  | LEFT JOIN  | how='left'  | Keep all left rows  |
-  | Right Join | RIGHT JOIN | how='right' | Keep all right rows |
-  | Full Join  | FULL JOIN  | how='outer' | Keep everything     |
+- Common join types:
+  | Type | SQL | Pandas | Meaning |
+  |---|---|---|---|
+  | Inner Join | `INNER JOIN` | `how='inner'` | Keep matching rows only |
+  | Left Join | `LEFT JOIN` | `how='left'` | Keep all left rows |
+  | Right Join | `RIGHT JOIN` | `how='right'` | Keep all right rows |
+  | Full Join | `FULL JOIN` | `how='outer'` | Keep all rows |
 
 ---
 
@@ -35,14 +35,14 @@ This is one of the **most important concepts** in data processing.
 ### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/description/)
 
 #### 📝 Description
-**Problem:**
+**Problem**  
 Return each person's first name, last name, city, and state.  
 If an address does not exist, `city` and `state` should be `NULL`.
 
-**Pattern:**
+**Pattern**  
 `LEFT JOIN`
 
-**Why this problem belongs here:**
+**Why this problem belongs here**  
 We need to keep all rows from `Person` and match rows from `Address` when available.
 
 #### 🧩 Example
@@ -85,24 +85,23 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ## Common Pitfalls
 
-* Duplicate keys → unexpected row duplication
-* Wrong join type → missing or extra rows
+- Using the wrong join type
+- Joining on the wrong key
+- Forgetting table aliases in self joins
+- Producing duplicate rows because the join key is not unique
 
 ---
 
 ## Summary
 
-* JOIN = combine tables using a key
-* SQL ↔ Pandas mapping is direct
-* Most problems involve:
-
-  * choosing correct join type
-  * handling duplicates
+- JOIN problems are about combining related tables correctly
+- A lot of SQL interview questions depend more on choosing the right join than writing complex logic
+- Self joins and repeated joins are very common follow-ups
 
 ---
 
 ## Related Concepts
 
-* Aggregation (GROUP BY)
-* Subqueries
-* Window Functions
+- Aggregation (GROUP BY)
+- Subqueries
+- Window Functions
