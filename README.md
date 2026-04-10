@@ -9,3 +9,4 @@ Concept-based LeetCode notes repository.
 | 175. Combine Two Tables | Easy | join | |
 | 176. Second Highest Salary | Med. | subquery | sorting |
 | 177. Nth Highest Salary | Med. | sorting | subquery |
+| 178. Rank Scores | Med. | ranking | sorting |
