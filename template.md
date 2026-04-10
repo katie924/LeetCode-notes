@@ -15,7 +15,7 @@
 
 ### [Problem Number]. [Problem Title]
 
-#### 📝 Description
+#### Description
 
 **Problem**  
 ...
@@ -26,7 +26,7 @@
 **Why this problem belongs here**  
 ...
 
-#### 🧩 Example
+#### Example
 
 **Input**
 ...
@@ -34,7 +34,7 @@
 **Output**
 ...
 
-#### 🧪 Solution
+#### Solution
 
 **Python**
 ```python

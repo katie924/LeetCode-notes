@@ -20,13 +20,14 @@ This is one of the **most important concepts** in data processing.
   * All left
   * All right
   * Everything
+
 - Common join types:
   | Type | SQL | Pandas | Meaning |
-  |---|---|---|---|
+  | ---  | --- | ---    | ---     |
   | Inner Join | `INNER JOIN` | `how='inner'` | Keep matching rows only |
-  | Left Join | `LEFT JOIN` | `how='left'` | Keep all left rows |
-  | Right Join | `RIGHT JOIN` | `how='right'` | Keep all right rows |
-  | Full Join | `FULL JOIN` | `how='outer'` | Keep all rows |
+  | Left Join  | `LEFT JOIN`  | `how='left'`  | Keep all left rows      |
+  | Right Join | `RIGHT JOIN` | `how='right'` | Keep all right rows     |
+  | Full Join  | `FULL JOIN`  | `how='outer'` | Keep all rows           |
 
 ---
 
@@ -34,7 +35,7 @@ This is one of the **most important concepts** in data processing.
 
 ### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/description/)
 
-#### 📝 Description
+#### Description
 **Problem**  
 Return each person's first name, last name, city, and state.  
 If an address does not exist, `city` and `state` should be `NULL`.
@@ -45,7 +46,7 @@ If an address does not exist, `city` and `state` should be `NULL`.
 **Why this problem belongs here**  
 We need to keep all rows from `Person` and match rows from `Address` when available.
 
-#### 🧩 Example
+#### Example
 **Input**
 
 `Person`
@@ -66,7 +67,7 @@ We need to keep all rows from `Person` and match rows from `Address` when availa
 | Allen     | Wang     | NULL          | NULL     |
 | Bob       | Alice    | New York City | New York |
 
-#### 🧪 Solution
+#### Solution
 **MySQL**
 ```sql
 SELECT p.firstName, p.lastName, a.city, a.state
@@ -74,9 +75,10 @@ FROM Person AS p
 LEFT JOIN Address AS a
 ON p.personId = a.personId;
 ```
+
 **Pandas**
 
-```python id="r4k2hd"
+```python
 def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
     return person.merge(address, on='personId', how='left')[['firstName', 'lastName', 'city', 'state']]
 ```
@@ -94,9 +96,9 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ## Summary
 
-- JOIN problems are about combining related tables correctly
-- A lot of SQL interview questions depend more on choosing the right join than writing complex logic
-- Self joins and repeated joins are very common follow-ups
+- Join problems are about combining related tables correctly
+- Many SQL interview questions depend more on choosing the right join than on complex logic
+- Self joins and repeated joins are common follow-up patterns
 
 ---
 

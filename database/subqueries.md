@@ -25,7 +25,7 @@ Subqueries are common in:
 
 ### [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/description/)
 
-#### 📝 Description
+#### Description
 **Problem**  
 Find the second highest distinct salary.
 
@@ -35,7 +35,7 @@ Subquery + aggregation
 **Why this problem belongs here**  
 The inner query finds the highest salary first. The outer query removes that value, and `MAX()` returns the largest salary among the remaining rows.
 
-#### 🧩 Example
+#### Example
 **Input**
 
 `Employee`
@@ -51,7 +51,7 @@ The inner query finds the highest salary first. The outer query removes that val
 |---|
 | 200 |
 
-#### 🧪 Solution
+#### Solution
 
 **MySQL**
 ```sql
@@ -116,3 +116,4 @@ LIMIT 1 OFFSET 1;
 - Aggregation (GROUP BY)
 - Sorting
 - Joins
+- Filtering

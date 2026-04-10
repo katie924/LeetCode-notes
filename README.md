@@ -4,8 +4,7 @@ Concept-based LeetCode notes repository.
 
 ## Database
 
-| problem | main concept | other concept |
-| --- | --- | --- |
-| 175. Combine Two Tables | join | |
-| 176. Second Highest Salary | subquery | sorting |
-
+| problem | difficulty | main concept | other concept |
+| --- | --- | --- | --- |
+| 175. Combine Two Tables | Easy | join | |
+| 176. Second Highest Salary | Med. | subquery | sorting |
