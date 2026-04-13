@@ -141,6 +141,79 @@ def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
 
 ---
 
+### [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/description/)
+
+#### Description
+**Problem**  
+Find customers who never placed an order.
+
+**Pattern**  
+`LEFT JOIN` + `IS NULL`
+
+**Why this problem belongs here**  
+We keep all rows from `Customers`, join matching rows from `Orders`, and then keep only customers without a matching order.
+
+#### Example
+**Input**
+
+`Customers`
+| id | name |
+|---|---|
+| 1 | Joe |
+| 2 | Henry |
+| 3 | Sam |
+| 4 | Max |
+
+`Orders`
+| id | customerId |
+|---|---|
+| 1 | 3 |
+| 2 | 1 |
+
+**Output**
+
+| Customers |
+|---|
+| Henry |
+| Max |
+
+#### Solution
+**MySQL**
+```sql
+SELECT c.name AS Customers
+FROM Customers c
+LEFT JOIN Orders o ON c.id = o.customerId
+WHERE o.customerId IS NULL;
+```
+
+```sql
+-- subquery approach
+SELECT name AS Customers
+FROM Customers
+WHERE id NOT IN (
+    SELECT customerId
+    FROM Orders
+);
+```
+
+**Pandas**
+```python
+# merge approach
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    df = customers.merge(orders, left_on="id", right_on="customerId", how="left") \
+        .query("customerId.isna()")
+    return df[["name"]].rename(columns={"name": "Customers"})
+```
+
+```python
+# isin approach
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    df = customers[~customers["id"].isin(orders["customerId"])]
+    return df[["name"]].rename(columns={"name": "Customers"})
+```
+
+---
+
 ## Common Pitfalls
 
 - Using the wrong join type
