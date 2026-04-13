@@ -11,3 +11,4 @@ Concept-based LeetCode notes repository.
 | 177. Nth Highest Salary | Med. | sorting | subquery |
 | 178. Rank Scores | Med. | ranking | sorting |
 | 180. Consecutive Numbers | Med. | window function | subquery, self join |
+| 181. Employees Earning More Than Their Managers | Easy | join | |

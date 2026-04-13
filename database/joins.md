@@ -85,6 +85,62 @@ def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFr
 
 ---
 
+### [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/description/)
+
+#### Description
+**Problem**  
+Find employees who earn more than their managers.
+
+**Pattern**  
+`JOIN`
+
+**Why this problem belongs here**  
+The `Employee` table needs to be joined with itself: one copy represents the employee, and the other copy represents that employee's manager.
+
+#### Example
+**Input**
+
+`Employee`
+| id | name  | salary | managerId |
+|---|---|---|---|
+| 1 | Joe   | 70000 | 3 |
+| 2 | Henry | 80000 | 4 |
+| 3 | Sam   | 60000 | NULL |
+| 4 | Max   | 90000 | NULL |
+
+**Output**
+
+| Employee |
+|---|
+| Joe |
+
+#### Solution
+**MySQL**
+```sql
+SELECT e.name AS Employee
+FROM Employee e
+JOIN Employee e2 ON e.managerId = e2.id
+WHERE e.salary > e2.salary;
+```
+
+```sql
+-- This is an older style of writing an inner join.
+SELECT e1.name AS Employee
+FROM Employee e1, Employee e2
+WHERE e1.managerId = e2.id
+  AND e1.salary > e2.salary;
+```
+
+**Pandas**
+```python
+def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
+    return employee.merge(employee, left_on="managerId", right_on="id") \
+        .query("salary_x > salary_y")[["name_x"]] \
+        .rename(columns={"name_x": "Employee"})
+```
+
+---
+
 ## Common Pitfalls
 
 - Using the wrong join type
