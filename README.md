@@ -14,3 +14,4 @@ Concept-based LeetCode notes repository.
 | 181. Employees Earning More Than Their Managers | Easy | join |  |
 | 182. Duplicate Emails | Easy | aggregation | filtering |
 | 183. Customers Who Never Order | Easy | join | subquery |
+| 184. Department Highest Salary | Med. | subquery | join, aggregation, ranking |
