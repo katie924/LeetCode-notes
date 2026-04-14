@@ -87,6 +87,81 @@ def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
 
 ---
 
+### [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/description/)
+
+#### Description
+
+**Problem**  
+Find employees whose salaries are in the top three unique salaries of each department.
+
+**Pattern**  
+Partitioned `DENSE_RANK()`
+
+**Why this problem belongs here**  
+We rank salaries inside each department and keep ranks `1` to `3`. `DENSE_RANK()` is important because employees with the same salary should share the same rank.
+
+#### Example
+
+**Input**
+
+See the original problem statement for the full sample tables.
+
+**Output**
+
+See the original problem statement for the full sample result.
+
+#### Solution
+
+**SQL**
+```sql
+SELECT d.name AS Department, e.name AS Employee, e.salary AS Salary
+FROM (
+    SELECT *,
+           DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) AS rnk
+    FROM Employee
+) e
+LEFT JOIN Department d ON e.departmentId = d.id
+WHERE rnk <= 3;
+```
+
+- `PARTITION BY departmentId` restarts the ranking inside each department.
+- `ORDER BY salary DESC` ranks higher salaries first.
+- `rnk <= 3` keeps employees in the top three unique salaries.
+
+```sql
+-- Older join style
+SELECT Department, Employee, Salary
+FROM (
+    SELECT d.name AS Department,
+           e.name AS Employee,
+           e.salary AS Salary,
+           DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY e.salary DESC) AS r
+    FROM Employee e, Department d
+    WHERE e.departmentId = d.id
+) m
+WHERE r <= 3;
+```
+
+- `FROM Employee e, Department d` is an older way to write a join.
+- Modern SQL usually prefers explicit `JOIN ... ON ...` because it separates join logic from filter logic.
+
+**Pandas**
+```python
+def top_three_salaries(
+    employee: pd.DataFrame, department: pd.DataFrame
+) -> pd.DataFrame:
+    employee["rnk"] = employee.groupby("departmentId")["salary"].rank(
+        ascending=False, method="dense"
+    )
+    df = employee.query("rnk <= 3") \
+        .merge(department, left_on="departmentId", right_on="id") \
+        [['name_y', 'name_x', 'salary']]
+    df.columns = ['Department', 'Employee', 'Salary']
+    return df
+```
+
+---
+
 ## Common Pitfalls
 
 - Using `ROW_NUMBER()` when tied values should share the same rank

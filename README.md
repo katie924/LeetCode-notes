@@ -15,3 +15,4 @@ Concept-based LeetCode notes repository.
 | 182. Duplicate Emails | Easy | aggregation | filtering |
 | 183. Customers Who Never Order | Easy | join | subquery |
 | 184. Department Highest Salary | Med. | subquery | join, aggregation, ranking |
+| 185. Department Top Three Salaries | Hard | ranking | join |
