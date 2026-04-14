@@ -162,6 +162,91 @@ def top_three_salaries(
 
 ---
 
+### [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/)
+
+#### Description
+
+**Problem**  
+Delete duplicate emails and keep only the row with the smallest `id` for each email.
+
+**Pattern**  
+`ROW_NUMBER()` for deduplication
+
+**Why this problem belongs here**  
+We assign a row number inside each `email` group. The row with `rn = 1` is the first row to keep, and rows with `rn > 1` are duplicates to delete.
+
+#### Example
+
+**Input**
+
+`Person`
+| id | email |
+|---|---|
+| 1 | john@example.com |
+| 2 | bob@example.com |
+| 3 | john@example.com |
+
+**Output**
+
+`Person`
+| id | email |
+|---|---|
+| 1 | john@example.com |
+| 2 | bob@example.com |
+
+#### Solution
+
+**SQL**
+```sql
+DELETE FROM Person
+WHERE id IN (
+    SELECT id
+    FROM (
+        SELECT *,
+               ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS rn
+        FROM Person
+    ) t
+    WHERE rn > 1
+);
+```
+- `PARTITION BY email` restarts row numbering for each email.
+- `ORDER BY id` puts the smallest `id` first.
+- `rn > 1` finds duplicate rows that should be deleted.
+
+```sql
+-- Self join approach
+DELETE p1
+FROM Person p1
+JOIN Person p2
+ON p1.email = p2.email AND p1.id > p2.id;
+```
+- For the same email, `p1.id > p2.id` means `p1` is not the smallest row.
+- This deletes every duplicate row except the one with the smallest `id`.
+
+**Pandas**
+```python
+def delete_duplicate_emails(person: pd.DataFrame) -> None:
+    person["rnk"] = person.groupby("email")["id"].rank(
+        method="first", ascending=True
+    )
+    person.drop(person[person["rnk"] > 1].index, inplace=True)
+    person.drop(columns="rnk", inplace=True)
+```
+- `groupby("email")["id"]` ranks `id` values inside each email group.
+- The smallest `id` gets rank `1`, so rows with `rnk > 1` are duplicates.
+- `drop(..., inplace=True)` modifies the original DataFrame, which this problem requires.
+
+```python
+# drop duplicates approach
+def delete_duplicate_emails(person: pd.DataFrame) -> None:
+    person.sort_values(by="id", inplace=True)
+    person.drop_duplicates(subset="email", keep="first", inplace=True)
+```
+- Sort by `id` first so the smallest `id` appears first.
+- `drop_duplicates(subset="email", keep="first")` keeps the first row for each email.
+
+---
+
 ## Common Pitfalls
 
 - Using `ROW_NUMBER()` when tied values should share the same rank
